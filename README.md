@@ -1,72 +1,73 @@
-# Getting Started with Create React App
+# React Application with iTunes API.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+* Frontend React Application.
+* Frontend in React JS, JSX and Styled Components.
+* Backend in Node JS and Express.
+* iTunes Developer API.
 
-## Available Scripts
+## How to use/test the App:
+#### Open visual studio terminal and run the following commands
+```
+# clone repository from GitHub
+git clone git@github.com:hassandiv/itunes.git             
 
-In the project directory, you can run:
+# then
+cd itunes
 
-### `npm start`
+# Install dependencies for express server
+npm install
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Install dependencies for client
+cd client && npm install
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Run the client and the server with concurrently
+cd .. && npm run dev
 
 
+# Server runs on http://localhost:8080/ 
+# Client runs on http://localhost:3000/
+```
+
+### NPM Packages and Modules Installed:
+
+```
+# Client Side
+npm install styled-components
+
+# Server Side
+npm install express
+npm install -g concurrently
+npm install -g nodemon
+```
+
+### I've created 10 components for this App:
+
+1.``` provider > StoreContext.js```: 
+* Context API contains our initial states for the Application.
+
+2.``` App.js```: 
+* It contains our AppProvider, three Components: Header, Search, and Footer.
+
+3.``` Header.js```: 
+* Nav component is the header of the App, it contains menu items.
+
+4.``` Search.js```: 
+* Main component it contains our API call and load more function.
+
+5.``` Drawer.js```: 
+* Our sidebar has menu links and our searchform component.
+
+6.``` Footer.js```: 
+* Footer for the application.
+
+7.```components > ArtistCard.js```: 
+* It contains Artist props and JSX. 
+
+8.```components > AlbumCard.js```: 
+* It contains Album props and JSX. 
+
+9.```components > SongCard.js```: 
+* It contains Song props and JSX. 
+
+10.```components > SearchForm.js```: 
+* It contains our search form input and radio buttons. 
