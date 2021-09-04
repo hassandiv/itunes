@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { StoreContext } from './provider/StoreContext'
 import axios from 'axios'
 import styled from 'styled-components'
@@ -14,18 +14,17 @@ const StyledContainer = styled.main`
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    //padding-top: 70px;
 `;
 const StyledSection = styled.section`
-    height: 65vh;
+    height: 95vh;
     overflow-y: auto;
     padding: 0px 30px 0px 30px;
     z-index: 9;
     background: #ffffff;
-    padding-top: 5vh;
     text-align: center;
     position: relative;
     transition: '0.5s all';
+    padding-top: 5vh;
 `;
 const StyledTitle = styled.span`
     color: #000000;
@@ -35,14 +34,6 @@ const StyledTitle = styled.span`
     letter-spacing: 0em;
     text-align: center;
 `;
-// const StyledFlex = styled.div`
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: center;
-//     flex-direction: column;
-//     width: 100%;
-//     min-height: 20vh;
-// `;
 const StyledUl = styled.ul`
     max-width: 100%;
     min-height: 100%;
@@ -68,7 +59,6 @@ const StyledLi = styled.li`
     text-align: center;
     list-style: none;
 `;
-
 const StyledMenuIcon = styled.img`
     position: absolute;
     top: 15px;
@@ -77,7 +67,6 @@ const StyledMenuIcon = styled.img`
     height: auto;
     cursor: pointer;
 `;
-
 const StyledHomeIcon = styled.img`
     display: block;
     width: auto;
@@ -85,7 +74,6 @@ const StyledHomeIcon = styled.img`
     margin: 0 auto;
     padding: 70px 0px;
 `;
-
 const StyledIcon = styled.img`
     display: block;
     width: 50px;
@@ -93,7 +81,6 @@ const StyledIcon = styled.img`
     margin: 0 auto;
     animation: ${spinner} 1s ease-in infinite;
 `;
-
 const StyledIconNF = styled.img`
     display: block;
     width: 50px;
@@ -108,15 +95,14 @@ const StyledIconNF = styled.img`
 
 const Search = () => {
 
-    const { loading, setLoading, data, setData, page, setPage, limit, setLimit, status, setStatus, term, setTerm, music, setMusic } = useContext(StoreContext)
-    const { error, code } = status
+    const { loading, setLoading, data, setData, page, setPage, limit, setLimit, status, setStatus, term, music } = useContext(StoreContext)
+    const { code } = status
     const { song, album, musicArtist } = music
     const [full, setFull] = useState(true)
     const [loadMoreItems, setLoadMoreItems] = useState(false)
 
     console.log('data', data)
     console.log('page', page)
-
 
     const api = () => {
         //const CancelToken = axios.CancelToken
@@ -166,21 +152,15 @@ const Search = () => {
 
     const loadMore = e => {
         const { scrollTop, clientHeight, scrollHeight } = e.currentTarget
-        // console.log('scrollTop', scrollTop)
-        // console.log('clientHeight', clientHeight)
-        // console.log('scrollHeight', scrollHeight)
         if (scrollHeight - scrollTop === clientHeight) {
             setPage(page + 1)
             setLimit(limit + 10)
-            setLoadMoreItems(true)
-        }
-        else {
-            setLoadMoreItems(false)
+            //setLoadMoreItems(true)
         }
         if (sliceData.length === data.length) {
             setPage(page)
             setLimit(limit)
-            setLoadMoreItems(false)
+            //setLoadMoreItems(false)
         }
     }
 
@@ -193,10 +173,14 @@ const Search = () => {
             code: null
         })
         api()
+        if (sliceData.length == 10) {
+            setLoadMoreItems(true)
+        } else {
+            setLoadMoreItems(false)
+        }
     }, [term, song, album, musicArtist])
 
     
-
     return (
         <StyledContainer>
             <StyledMenuIcon onClick={() => setFull(!full)} alt="menu icon" src="/menu.svg" />
@@ -275,6 +259,6 @@ const Search = () => {
                 }
             </StyledSection>
         </StyledContainer>
-    );
+    )
 }
 export default Search

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { StoreContext } from '../provider/StoreContext'
 import styled from 'styled-components'
 
@@ -22,12 +22,6 @@ const StyledFlexRow = styled.div`
 const StyledRadioInput = styled.input`
     cursor: pointer;
     z-index: 1;
-    &:focus {
-        outline: none;
-    }
-    // &:checked {
-    //     border: 2px solid #ffffff;
-    // }
 `;
 const StyledLabel = styled.label`
     color: #ffffff;
@@ -49,9 +43,6 @@ const SearchForm = () => {
     const { term, setTerm, music, setMusic } = useContext(StoreContext)
 
     const { song, album, musicArtist } = music
-    console.log('song', song)
-    console.log('album', album)
-    console.log('musicArtist', musicArtist)
 
     const handleSelected = e => {
         setMusic({ [e.target.name]: true })
@@ -72,7 +63,6 @@ const SearchForm = () => {
                         value={song}
                         onChange={handleSelected}
                         checked={song ? true : false}
-                        //required
                     />
                     <StyledLabel
                         id="kind"
@@ -87,7 +77,6 @@ const SearchForm = () => {
                         value={musicArtist}
                         onChange={handleSelected}
                         checked={musicArtist ? true : false}
-                    //required
                     />
                     <StyledLabel
                         id="artistName"
@@ -102,7 +91,6 @@ const SearchForm = () => {
                         value={album}
                         onChange={handleSelected}
                         checked={album ? true : false}
-                    //required
                     />
                     <StyledLabel
                         id="collectionName"

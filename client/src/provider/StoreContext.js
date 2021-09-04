@@ -1,6 +1,4 @@
 import { useState, createContext } from 'react'
-
-
 export const StoreContext = createContext()    
     
 export const StoreProvider = ({ children }) => {
@@ -14,17 +12,7 @@ export const StoreProvider = ({ children }) => {
         error: null,
         code: null
     })
-    
-    // const [selected, setSelected] = useState({
-    //     isSong: false,
-    //     isAlbum: false,
-    //     isMusicArtist: false,
-    // })
-    // const [music, setMusic] = useState({
-    //     song: 'song',
-    //     album: 'album',
-    //     musicArtist: 'musicArtist',
-    // })
+
     const [music, setMusic] = useState({
         song: false,
         album: false,
