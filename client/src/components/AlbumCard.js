@@ -63,7 +63,7 @@ const StyledImg = styled.img`
     object-fit: cover;
 `;
 
-const SongCard = ({ artistName, collectionName, artworkUrl100, collectionViewUrl, collectionType }) => {
+const AlbumCard = ({ artistName, collectionName, artworkUrl100, collectionViewUrl, collectionType }) => {
 
 
     return (
@@ -75,4 +75,4 @@ const SongCard = ({ artistName, collectionName, artworkUrl100, collectionViewUrl
         </StyledCard>
     )
 }
-export default SongCard
+export default AlbumCard

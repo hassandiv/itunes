@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { spinner } from './animation/KeyFrames';
 import SongCard from './components/SongCard'
 import ArtistCard from './components/ArtistCard'
-import CollectionCard from './components/CollectionCard'
+import AlbumCard from './components/AlbumCard'
 import Drawer from './Drawer'
 
 const StyledContainer = styled.main`
@@ -238,7 +238,7 @@ const Search = () => {
                                                 artistType={item.artistType}
                                             />
                                         : album ?
-                                            <CollectionCard
+                                            <AlbumCard
                                                 key={index}
                                                 artistName={item.artistName}
                                                 artworkUrl100={item.artworkUrl100}

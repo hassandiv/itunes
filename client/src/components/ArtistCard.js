@@ -51,10 +51,9 @@ const StyledImg = styled.img`
     width: auto;
     height: 65%;
     object-fit: cover;
-    //border-radius: 100%;
 `;
 
-const SongCard = ({ artistName, artistLinkUrl, artistType }) => {
+const ArtistCard = ({ artistName, artistLinkUrl, artistType }) => {
 
     return (
         <StyledCard>
@@ -64,4 +63,4 @@ const SongCard = ({ artistName, artistLinkUrl, artistType }) => {
         </StyledCard>
     )
 }
-export default SongCard
+export default ArtistCard
