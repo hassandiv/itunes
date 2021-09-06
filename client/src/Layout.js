@@ -34,7 +34,7 @@ const StyledSection = styled.section`
     width: 100%;
     margin: 0 auto; 
     height: 95vh;
-    overflow-y: auto;
+    overflow-y: scroll;
     padding: 0px 20px;
     z-index: 9;
     background: #ffffff;
@@ -102,8 +102,12 @@ const StyledHomeIcon = styled.img`
     display: block;
     width: auto;
     height: 500px;
-    margin: 0 auto;
-    padding: 70px 0px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 `;
 const StyledIcon = styled.img`
     display: block;
@@ -133,7 +137,7 @@ const Layout = () => {
     const { loading, setLoading, data, setData, page, setPage, limit, setLimit, status, setStatus, term, music, entity } = useContext(StoreContext)
     const { code } = status
     const { song, album, musicArtist } = music
-    const [full, setFull] = useState(true)
+    const [full, setFull] = useState(false)
     const [loadMoreItems, setLoadMoreItems] = useState(false)
 
 
@@ -244,7 +248,7 @@ const Layout = () => {
             </StyledDrawer>
             <StyledSection
                 width={full}
-                id="test"
+                id="infinite-scroll-list"
                 data-cy="infinite-scroll-list"
                 onScroll={loadMore}
             >
@@ -264,7 +268,7 @@ const Layout = () => {
                             }
                         </StyledTitle>
                         <StyledUl
-                            width={full}
+                            //width={full}
                         >
                             {   loading  ?
                                 <StyledIcon alt="loading" src="/cd.svg" /> 
@@ -279,7 +283,7 @@ const Layout = () => {
                             <>
                                 {data && sliceData.map((item, index) => (
                                     <StyledCardLi
-                                        width={full}
+                                        //width={full}
                                     >
                                         {   song ?
                                             <SongCard

@@ -60,7 +60,7 @@ const StyledRow = styled.div`
     left: auto;
     right: auto;
     @media (min-width: 1400px) {
-        width: 260px;
+        width: 300px;
     }
     @media (max-width: 768px) {
         width: 350px;
