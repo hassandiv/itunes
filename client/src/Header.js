@@ -7,16 +7,7 @@ const StyledNav = styled.nav`
     align-items: center;
     justify-content: space-around;
     background-color: #000000;
-    //position: fixed;
     z-index: 999;
-`;
-const StyledH1 = styled.h1`
-    color: #fff;
-    font-size: 2rem;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    font-weight: 400;
-    line-height: 1.334;
-    letter-spacing: 0em;
 `;
 const StyledUl = styled.ul`
     width: 250px;
@@ -25,6 +16,9 @@ const StyledUl = styled.ul`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 const StyledLi = styled.li`
     list-style: none;
@@ -42,14 +36,16 @@ const StyledIcon = styled.img`
     display: block;
     width: 70px;
     height: 100%;
-    // margin: 0 auto;
+    @media (max-width: 768px) {
+        margin-left: auto;
+        padding-right: 15px;
+    }
 `;
 
 const Header = () => {
 
     return (
         <StyledNav>
-            {/* <StyledH1>Nextify</StyledH1> */}
             <StyledIcon alt="logo" src="/wave.svg" />
             <StyledUl>
                 <StyledLi>

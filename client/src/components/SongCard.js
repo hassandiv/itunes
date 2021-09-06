@@ -1,18 +1,25 @@
 import styled from 'styled-components';
 
 const StyledCard = styled.div`
-    width: 400px;
+    width: 470px;
+    max-width: 100%;
     height: 150px;
     background-color: #232323;
     border-radius: 5px;
     padding: 10px;
     position: relative;
     text-align: left;
-    margin: 0 auto;
+    margin: 10px;
     overflow: hidden;
     box-shadow:
     0 5px 10px rgba(154,160,185,0.7),
     0 15px 40px rgba(166,173,201,0.7);
+    @media (max-width: 768px) {
+        width: 500px;
+    }
+    @media (max-width: 550px) {
+        width: 330px;
+    }
 `;
 const StyledH1 = styled.h1`
     color: #fff;
@@ -46,27 +53,34 @@ const StyledSmall = styled.small`
     z-index: 10;
 `;
 const StyledRow = styled.div`
-    width: 250px;
+    width: 310px;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: row;
     position: absolute;
     bottom: 25px;
-    left: 5px;
+    left: auto;
+    right: auto;
+    @media (min-width: 1400px) {
+        width: 260px;
+    }
+    @media (max-width: 768px) {
+        width: 350px;
+    }
+    @media (max-width: 550px) {
+        width: 180px;
+    }
 `;
-const StyledPPIcon = styled.img`
-    display: block;
-    width: 25px;
-    height: 100%;
-    cursor: pointer;
-`;
-const StyledIcon = styled.img`
-    display: block;
-    width: 15px;
-    height: 100%;
-    cursor: pointer;
-`;
+// const StyledPPIcon = styled.img`
+//     display: block;
+//     width: 25px;
+//     height: 100%;
+//     cursor: pointer;
+// `;
+// const StyledIcon = styled.img`
+//     display: block;
+//     width: 15px;
+//     height: 100%;
+//     cursor: pointer;
+// `;
 const StyledLink = styled.a`
     text-decoration: none;
 `;
@@ -79,11 +93,6 @@ const StyledImg = styled.img`
     height: 100%;
     object-fit: cover;
 `;
-// const StyledAudio = styled.audio`
-//     z-index: 9;
-//     // visibility: hidden;
-//     // position: absolute;
-// `;
 
 const SongCard = ({ artistName, trackName, artworkUrl100, previewUrl, trackViewUrl, trackTimeMillis }) => {
 

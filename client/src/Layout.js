@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { StoreContext } from './provider/StoreContext'
 import axios from 'axios'
-import styled from 'styled-components'
-import { spinner } from './animation/KeyFrames';
+import styled, {css} from 'styled-components'
+import { spinner, fadeIn } from './animation/KeyFrames';
 import SongCard from './components/SongCard'
 import ArtistCard from './components/ArtistCard'
 import AlbumCard from './components/AlbumCard'
@@ -15,16 +15,36 @@ const StyledContainer = styled.main`
     flex-direction: row;
     align-items: flex-start;
 `;
+const StyledDrawer = styled.div`
+    width: 0px;
+    min-width: auto;
+    transition: 0.5s all;
+    ${props => props.width && css`
+        width: 350px;
+    `}
+    @media (max-width: 550px) {
+        //${props => props.width && css`
+            width: 100%;
+            min-width: 100%;
+            //transition: min-width 0.5s ease;
+        //`}
+    }
+`;
 const StyledSection = styled.section`
+    width: 100%;
+    margin: 0 auto; 
     height: 95vh;
     overflow-y: auto;
-    padding: 0px 30px 0px 30px;
+    padding: 0px 20px;
     z-index: 9;
     background: #ffffff;
     text-align: center;
     position: relative;
-    transition: '0.5s all';
     padding-top: 5vh;
+    @media (max-width: 768px) {
+        padding: 0px;
+        padding-top: 30px;
+    }
 `;
 const StyledTitle = styled.span`
     color: #000000;
@@ -35,20 +55,30 @@ const StyledTitle = styled.span`
     text-align: center;
 `;
 const StyledUl = styled.ul`
-    max-width: 100%;
     min-height: 100%;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    padding: 30px 0px;
+    flex-direction: row;
     margin: 0 auto;
+    width: 1050px;
+    max-width: 100%;
+    padding: 0px;
+    padding-top: 30px;
+    //justify-content: left;
+    // ${props => props.width && css`
+    //     justify-content: left;
+    // `}
+    @media (max-width: 768px) {
+        justify-content: center;
+        padding-top: 30px;
+    }
 `;
 const StyledCardLi = styled.li`
     list-style: none;
-    margin: 10px 0px;
-    display: flex;
-    align-items: center;
-    transition: 1s all;
+    animation-name: ${fadeIn};
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in;
+    animation-duration: 0.6s;
 `;
 const StyledLi = styled.li`
     position: absolute;
@@ -58,6 +88,7 @@ const StyledLi = styled.li`
     transform: translate(-50%, -50%);
     text-align: center;
     list-style: none;
+    width: 600px;
 `;
 const StyledMenuIcon = styled.img`
     position: absolute;
@@ -77,14 +108,14 @@ const StyledHomeIcon = styled.img`
 const StyledIcon = styled.img`
     display: block;
     width: 50px;
-    height: 100%;
+    height: auto;
     margin: 0 auto;
     animation: ${spinner} 1s ease-in infinite;
 `;
 const StyledIconNF = styled.img`
     display: block;
     width: 50px;
-    height: 100%;
+    height: auto;
     margin: 0 auto;
     position: absolute;
     top: 40%;
@@ -92,17 +123,25 @@ const StyledIconNF = styled.img`
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 `;
+const StyledLoadMore= styled.p`
+    font-size: 1.3rem;
+    padding: 40px 0px;
+`;
 
-const Search = () => {
+const Layout = () => {
 
-    const { loading, setLoading, data, setData, page, setPage, limit, setLimit, status, setStatus, term, music } = useContext(StoreContext)
+    const { loading, setLoading, data, setData, page, setPage, limit, setLimit, status, setStatus, term, music, entity } = useContext(StoreContext)
     const { code } = status
     const { song, album, musicArtist } = music
     const [full, setFull] = useState(true)
     const [loadMoreItems, setLoadMoreItems] = useState(false)
 
+
+
+    console.log('entity', entity)
     console.log('data', data)
     console.log('page', page)
+    console.log('music', music)
 
     const api = () => {
         //const CancelToken = axios.CancelToken
@@ -110,7 +149,7 @@ const Search = () => {
         setLoading(true)
         axios({
             method: 'GET',
-            url: `https://itunes.apple.com/search?term=${term}&entity=${song ? 'song' : album ? 'album' : musicArtist ? 'musicArtist' : ''}&limit=200`,
+            url: `https://itunes.apple.com/search?term=${term}&entity=${entity}&limit=200`,
             mode: 'cors',
             cancelToken: new axios.CancelToken(c => cancel = c),
             // cancelToken: new CancelToken(function executor(c) {
@@ -155,15 +194,30 @@ const Search = () => {
         if (scrollHeight - scrollTop === clientHeight) {
             setPage(page + 1)
             setLimit(limit + 10)
-            //setLoadMoreItems(true)
+            setLoadMoreItems(true)
+        }
+        else {
+            setLoadMoreItems(false)
         }
         if (sliceData.length === data.length) {
             setPage(page)
             setLimit(limit)
-            //setLoadMoreItems(false)
+            setLoadMoreItems(false)
         }
     }
 
+    // useEffect(() => {
+    //     setLoadMoreItems(true)
+    //     if (sliceData.length !== data.length || sliceData.length === data.length) {
+    //         setLoadMoreItems(false)
+    //     }
+    //     // if (sliceData.length !== data.length) {
+    //     //     setLoadMoreItems(true)
+    //     // } else {
+    //     //     setLoadMoreItems(false)
+    //     // }
+    // }, [page])
+    
     useEffect(() => {
         setData([])
         setPage(1)
@@ -173,45 +227,50 @@ const Search = () => {
             code: null
         })
         api()
-        if (sliceData.length == 10) {
-            setLoadMoreItems(true)
-        } else {
-            setLoadMoreItems(false)
-        }
-    }, [term, song, album, musicArtist])
+    }, [term, entity])
 
-    
     return (
         <StyledContainer>
-            <StyledMenuIcon onClick={() => setFull(!full)} alt="menu icon" src="/menu.svg" />
-            <div style={full ? { width: '0px', transition: '0.5s all' } : { width: '350px', transition: '0.5s all' }}>
+            <StyledMenuIcon
+                data-cy="menu-btn"
+                onClick={() => setFull(!full)}
+                alt="menu icon"
+                src="/menu.svg"
+            />
+            <StyledDrawer
+                width={full}
+            >
                 <Drawer />
-            </div>
+            </StyledDrawer>
             <StyledSection
+                width={full}
+                id="test"
+                data-cy="infinite-scroll-list"
                 onScroll={loadMore}
-                style={full ? { width: '100%', transition: '0.5s all' } : { width: '80%', transition: '0.5s all' }}
             >
                 {   term === '' && data.length === 0 ?
-                    <StyledHomeIcon alt="sound" src="/equalizer.svg" />
+                    <StyledHomeIcon alt="equalizer background" src="/equalizer.svg" />
                     :
                     <>
                         <StyledTitle>
-                            { song && data.length !== 0 ?
+                            {   song && data.length !== 0 ?
                                 'Songs'
-                            : musicArtist && data.length !== 0 ?
+                            :   musicArtist && data.length !== 0 ?
                                 'Artists'
-                            : album && data.length !== 0 ?
+                            :   album && data.length !== 0 ?
                                 'Albums'
                             :
                                 null
                             }
                         </StyledTitle>
-                        <StyledUl style={full ? { width: '1400px', transition: '0.5s all' } : { width: '900px', transition: '0.5s all' }}>
+                        <StyledUl
+                            width={full}
+                        >
                             {   loading  ?
                                 <StyledIcon alt="loading" src="/cd.svg" /> 
-                            : code > 300 ?
+                            :   code > 300 ?
                                 <StyledLi><b>{code}</b>. That's an error.<br></br>The server encountered a temporary error and could not complete your request. Please try again in 30 seconds.</StyledLi>
-                            : code < 300 && data.length === 0 && term !== '' ?
+                            :   code < 300 && data.length === 0 && term !== '' ?
                                 <>
                                     <StyledIconNF alt="sound" src="/search.svg" />
                                     <StyledLi>Sorry we couldn't find any matches for <b>{term}</b>, please try different keyword.</StyledLi>
@@ -219,7 +278,9 @@ const Search = () => {
                             :
                             <>
                                 {data && sliceData.map((item, index) => (
-                                    <StyledCardLi style={full ? { flex: '0 0 33.333333%' } : { flex: '50%' }}>
+                                    <StyledCardLi
+                                        width={full}
+                                    >
                                         {   song ?
                                             <SongCard
                                                 key={index}
@@ -230,14 +291,14 @@ const Search = () => {
                                                 artworkUrl100={item.artworkUrl100}
                                                 previewUrl={item.previewUrl}
                                             />
-                                        : musicArtist ?
+                                        :   musicArtist ?
                                             <ArtistCard
                                                 key={index}
                                                 artistLinkUrl={item.artistLinkUrl}
                                                 artistName={item.artistName}
                                                 artistType={item.artistType}
                                             />
-                                        : album ?
+                                        :   album ?
                                             <AlbumCard
                                                 key={index}
                                                 artistName={item.artistName}
@@ -253,12 +314,20 @@ const Search = () => {
                                 ))}
                             </>
                             }
-                            <p>{loadMoreItems ? 'loading...' : ''}</p>
                         </StyledUl>
+                        <StyledLoadMore>
+                            {   loadMoreItems && sliceData.length !== data.length ?
+                                'loading...'
+                            :   !loadMoreItems && sliceData.length === data.length && !loading ?
+                                'no more items found'
+                            :
+                                ''
+                            }
+                        </StyledLoadMore>
                     </>
                 }
             </StyledSection>
         </StyledContainer>
     )
 }
-export default Search
+export default Layout

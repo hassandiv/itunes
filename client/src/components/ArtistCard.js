@@ -8,7 +8,7 @@ const StyledCard = styled.div`
     padding: 10px;
     position: relative;
     text-align: left;
-    margin: 0 auto;
+    margin: 10px;
     overflow: hidden;
     box-shadow:
     0 5px 10px rgba(154,160,185,0.7),

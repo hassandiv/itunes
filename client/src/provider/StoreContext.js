@@ -8,15 +8,15 @@ export const StoreProvider = ({ children }) => {
     const [page, setPage] = useState(1)
     const [limit, setLimit] = useState(10)
     const [term, setTerm] = useState('')
+    const [entity, setEntity] = useState('')
     const [status, setStatus] = useState({
         error: null,
         code: null
     })
-
     const [music, setMusic] = useState({
         song: false,
-        album: false,
         musicArtist: false,
+        album: false,
     })
 
     return (
@@ -30,10 +30,12 @@ export const StoreProvider = ({ children }) => {
                 setPage,
                 limit,
                 setLimit,
-                status,
-                setStatus,
                 term,
                 setTerm,
+                entity,
+                setEntity,
+                status,
+                setStatus,
                 music,
                 setMusic
             }}>

@@ -6,6 +6,9 @@ const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
     width: 300px;
+    @media (max-width: 550px) {
+        width: 330px;
+    }
 `;
 const StyledH2 = styled.h2`
     color: #fff;
@@ -22,6 +25,9 @@ const StyledFlexRow = styled.div`
 const StyledRadioInput = styled.input`
     cursor: pointer;
     z-index: 1;
+    &:focus {
+        outline: none;
+    }
 `;
 const StyledLabel = styled.label`
     color: #ffffff;
@@ -40,72 +46,74 @@ const StyledInput = styled.input`
 
 const SearchForm = () => {
 
-    const { term, setTerm, music, setMusic } = useContext(StoreContext)
-
-    const { song, album, musicArtist } = music
+    const { term, setTerm, setMusic, entity, setEntity } = useContext(StoreContext)
 
     const handleSelected = e => {
         setMusic({ [e.target.name]: true })
+        const value = e.target.value;
+        setEntity(value)
     }
-
     const handleChange = e => {
-        setTerm(e.target.value)
+        const value = e.target.value
+        setTerm(value)
     }
 
     return (
         <StyledForm>
             <StyledH2>Search by*</StyledH2>
-                <StyledFlexRow>
-                    <StyledRadioInput
-                        type="radio"
-                        name="song"
-                        id="song"
-                        value={song}
-                        onChange={handleSelected}
-                        checked={song ? true : false}
-                    />
-                    <StyledLabel
-                        id="kind"
-                        htmlFor="kind"
-                    >
-                        Song
-                    </StyledLabel>
-                    <StyledRadioInput
-                        type="radio"
-                        name="musicArtist"
-                        id="artist"
-                        value={musicArtist}
-                        onChange={handleSelected}
-                        checked={musicArtist ? true : false}
-                    />
-                    <StyledLabel
-                        id="artistName"
-                        htmlFor="artistName"
-                    >
-                        Artist
-                    </StyledLabel>
-                    <StyledRadioInput
-                        type="radio"
-                        name="album"
-                        id="album"
-                        value={album}
-                        onChange={handleSelected}
-                        checked={album ? true : false}
-                    />
-                    <StyledLabel
-                        id="collectionName"
-                        htmlFor="collectionName"
-                    >
-                        Album
-                    </StyledLabel>
-                </StyledFlexRow>
-                <StyledInput
-                    type="search"
-                    name="term"
-                    placeholder="Artists, songs or albums"
-                    value={term}
-                    onChange={handleChange}
+            <StyledFlexRow>
+                <StyledRadioInput
+                    type="radio"
+                    name="song"
+                    id="song"
+                    value="song"
+                    checked={entity === "song"}
+                    onChange={handleSelected}
                 />
+                <StyledLabel
+                    id="kind"
+                    htmlFor="kind"
+                >
+                    Song
+                </StyledLabel>
+                <StyledRadioInput
+                    //data-cy="artist-radio-btn"
+                    type="radio"
+                    name="musicArtist"
+                    id="artist"
+                    value="musicArtist"
+                    checked={entity === "musicArtist"}
+                    onChange={handleSelected}
+                />
+                <StyledLabel
+                    id="artistName"
+                    htmlFor="artistName"
+                >
+                    Artist
+                </StyledLabel>
+                <StyledRadioInput
+                    //data-cy="album-radio-btn"
+                    type="radio"
+                    name="album"
+                    id="album"
+                    value="album"
+                    checked={entity === "album"}
+                    onChange={handleSelected}
+                />
+                <StyledLabel
+                    id="collectionName"
+                    htmlFor="collectionName"
+                >
+                    Album
+                </StyledLabel>
+            </StyledFlexRow>
+            <StyledInput
+                type="search"
+                name="term"
+                placeholder="Artists, songs or albums"
+                value={term}
+                onChange={handleChange}
+            />
         </StyledForm>
     )
 }

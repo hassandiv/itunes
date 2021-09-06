@@ -24,7 +24,7 @@ cd client && npm install
 cd .. && npm run dev
 
 
-# Server runs on http://localhost:8080/ 
+# Server runs on http://localhost:1000/ 
 # Client runs on http://localhost:3000/
 ```
 
@@ -32,6 +32,7 @@ cd .. && npm run dev
 
 ```
 # Client Side
+npm install axios
 npm install styled-components
 
 # Server Side
@@ -51,8 +52,8 @@ npm install -g nodemon
 3.``` Header.js```: 
 * Nav component is the header of the App, it contains menu items.
 
-4.``` Search.js```: 
-* Main component it contains our API call and load more function.
+4.``` Layout.js```: 
+* Main component it contains our API call, load more function and layout.
 
 5.``` Drawer.js```: 
 * Our sidebar has menu links and our searchform component.

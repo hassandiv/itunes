@@ -6,6 +6,7 @@ const StyledAside = styled.aside`
     background-color: #101010;
     z-index: 1;
     padding: 0px 20px;
+    overflow: hidden;
 `;
 const StyledFlex = styled.div`
     display: flex;
@@ -15,6 +16,9 @@ const StyledFlex = styled.div`
     width: 100%;
     height: 320px;
     padding-top: 20px;
+    @media (max-width: 768px) {
+        height: 420px;
+    }
 `;
 const StyledUl = styled.ul`
     list-style: none;
@@ -25,6 +29,24 @@ const StyledUl = styled.ul`
     height: 115px;
     width: 300px;
     padding: 0px;
+    @media (max-width: 550px) {
+        width: 330px;
+    }
+`;
+const StyledMenuUl = styled.ul`
+    padding: 0px;
+    display: none;
+    height: 115px;
+    @media (max-width: 768px) {
+        width: 300px;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    @media (max-width: 550px) {
+        width: 330px;
+    }
 `;
 const StyledLi = styled.li`
     list-style: none;
@@ -35,6 +57,15 @@ const StyledLi = styled.li`
         border: 2px #fff;
     }
 `;
+// const StyledMenuLi = styled.li`
+//     list-style: none;
+//     display: flex;
+//     flex-direction: row;
+//     align-items: center;
+//     &:hover {
+//         border: 2px #fff;
+//     }
+// `;
 const StyledLink = styled.a`
     text-decoration: none;
     color: #ffffff;
@@ -60,18 +91,32 @@ const Drawer = () => {
             <StyledFlex>
                 <StyledUl>
                     <StyledLi>
-                        <StyledIcon alt="next" src="/home.svg" />
+                        <StyledIcon alt="Home" src="/home.svg" />
                         <StyledLink href="#">Home</StyledLink>
                     </StyledLi>
                     <StyledLi>
-                        <StyledIcon alt="next" src="/library.svg" />
+                        <StyledIcon alt="Your Library" src="/library.svg" />
                         <StyledLink href="#">Your Library</StyledLink>
                     </StyledLi>
                     <StyledLi>
-                        <StyledIcon alt="next" src="/like.svg" />
+                        <StyledIcon alt="nLiked songs" src="/like.svg" />
                         <StyledLink href="#">Liked Songs</StyledLink>
                     </StyledLi>
                 </StyledUl>
+                <StyledMenuUl>
+                    <StyledLi>
+                        <StyledIcon alt="Premium" src="/premium-badge.svg" />
+                        <StyledLink href="#">Premium</StyledLink>
+                    </StyledLi>
+                    <StyledLi>
+                        <StyledIcon alt="Support" src="/help.svg" />
+                        <StyledLink href="#">Support</StyledLink>
+                    </StyledLi>
+                    <StyledLi>
+                        <StyledIcon alt="Download" src="/cloud-computing.svg" />
+                        <StyledLink href="#">Download</StyledLink>
+                    </StyledLi>
+                </StyledMenuUl>
                 <SearchForm />
             </StyledFlex>
         </StyledAside>
