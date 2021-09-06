@@ -18,6 +18,9 @@ const StyledH1 = styled.h1`
     line-height: 1.334;
     letter-spacing: 0em;
     padding-left: 30px;
+    @media (max-width: 550px) {
+        font-size: 0.9rem;
+    }
 `;
 const StyledH5 = styled.h5`
     color: #fff;
@@ -27,6 +30,9 @@ const StyledH5 = styled.h5`
     line-height: 1.334;
     letter-spacing: 0em;
     padding-right: 30px;
+    @media (max-width: 550px) {
+        font-size: 0.7rem;
+    }
 `;
 
 const Footer = () => {

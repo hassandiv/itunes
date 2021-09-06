@@ -13,6 +13,9 @@ const StyledCard = styled.div`
     box-shadow:
     0 5px 10px rgba(154,160,185,0.7),
     0 15px 40px rgba(166,173,201,0.7);
+    @media (max-width: 330px) {
+        width: 275px;
+    }
 `;
 const StyledH1 = styled.h1`
     color: #fff;

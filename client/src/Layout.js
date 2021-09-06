@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { StoreContext } from './provider/StoreContext'
 import axios from 'axios'
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 import { spinner, fadeIn } from './animation/KeyFrames';
 import SongCard from './components/SongCard'
 import ArtistCard from './components/ArtistCard'
@@ -15,19 +15,13 @@ const StyledContainer = styled.main`
     flex-direction: row;
     align-items: flex-start;
 `;
-const StyledDrawer = styled.div`
-    width: 0px;
-    min-width: auto;
+const StyledDrawer = styled.aside`
+    height: 100vh;
+    width: ${props => props.width};
     transition: 0.5s all;
-    ${props => props.width && css`
-        width: 350px;
-    `}
+    background-color: #101010;
     @media (max-width: 550px) {
-        //${props => props.width && css`
-            width: 100%;
-            min-width: 100%;
-            //transition: min-width 0.5s ease;
-        //`}
+        min-width: ${props => props.minWidth};
     }
 `;
 const StyledSection = styled.section`
@@ -64,10 +58,6 @@ const StyledUl = styled.ul`
     max-width: 100%;
     padding: 0px;
     padding-top: 30px;
-    //justify-content: left;
-    // ${props => props.width && css`
-    //     justify-content: left;
-    // `}
     @media (max-width: 768px) {
         justify-content: center;
         padding-top: 30px;
@@ -108,6 +98,9 @@ const StyledHomeIcon = styled.img`
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    @media (max-width: 550px) {
+        height: 300px;
+    }
 `;
 const StyledIcon = styled.img`
     display: block;
@@ -140,15 +133,7 @@ const Layout = () => {
     const [full, setFull] = useState(false)
     const [loadMoreItems, setLoadMoreItems] = useState(false)
 
-
-
-    console.log('entity', entity)
-    console.log('data', data)
-    console.log('page', page)
-    console.log('music', music)
-
-    const api = () => {
-        //const CancelToken = axios.CancelToken
+    useEffect(() => {
         let cancel
         setLoading(true)
         axios({
@@ -156,11 +141,6 @@ const Layout = () => {
             url: `https://itunes.apple.com/search?term=${term}&entity=${entity}&limit=200`,
             mode: 'cors',
             cancelToken: new axios.CancelToken(c => cancel = c),
-            // cancelToken: new CancelToken(function executor(c) {
-            //     // An executor function receives a cancel function as a parameter
-            //     cancel = c;
-            // }),
-            page
         })
         .then(res => {
             if (res.status < 300) {
@@ -174,7 +154,7 @@ const Layout = () => {
                     code: res.status,
                 })
             }
-            //console.log('res 2', res)
+            //console.log("Results for " + term + ": ", res.data)
         })
         .catch(err => {
             if (err.response && err.response.status > 300) {
@@ -187,9 +167,8 @@ const Layout = () => {
             }
             if (axios.isCancel(err)) return
         })
-        //console.log('cancelToken', CancelToken)
         return () => cancel()
-    }
+    }, [term, entity])
 
     const sliceData = data.slice(0, limit)
 
@@ -209,18 +188,6 @@ const Layout = () => {
             setLoadMoreItems(false)
         }
     }
-
-    // useEffect(() => {
-    //     setLoadMoreItems(true)
-    //     if (sliceData.length !== data.length || sliceData.length === data.length) {
-    //         setLoadMoreItems(false)
-    //     }
-    //     // if (sliceData.length !== data.length) {
-    //     //     setLoadMoreItems(true)
-    //     // } else {
-    //     //     setLoadMoreItems(false)
-    //     // }
-    // }, [page])
     
     useEffect(() => {
         setData([])
@@ -230,7 +197,6 @@ const Layout = () => {
             error: null,
             code: null
         })
-        api()
     }, [term, entity])
 
     return (
@@ -242,13 +208,12 @@ const Layout = () => {
                 src="/menu.svg"
             />
             <StyledDrawer
-                width={full}
+                width={full ? '350px' : '0px'}
+                minWidth={full ? '100%' : '0px'}
             >
                 <Drawer />
             </StyledDrawer>
             <StyledSection
-                width={full}
-                id="infinite-scroll-list"
                 data-cy="infinite-scroll-list"
                 onScroll={loadMore}
             >
@@ -267,9 +232,7 @@ const Layout = () => {
                                 null
                             }
                         </StyledTitle>
-                        <StyledUl
-                            //width={full}
-                        >
+                        <StyledUl>
                             {   loading  ?
                                 <StyledIcon alt="loading" src="/cd.svg" /> 
                             :   code > 300 ?
@@ -282,9 +245,7 @@ const Layout = () => {
                             :
                             <>
                                 {data && sliceData.map((item, index) => (
-                                    <StyledCardLi
-                                        //width={full}
-                                    >
+                                    <StyledCardLi>
                                         {   song ?
                                             <SongCard
                                                 key={index}
@@ -304,7 +265,8 @@ const Layout = () => {
                                             />
                                         :   album ?
                                             <AlbumCard
-                                                key={index}
+                                                //key={index}
+                                                key={item.collectionId}
                                                 artistName={item.artistName}
                                                 artworkUrl100={item.artworkUrl100}
                                                 collectionViewUrl={item.collectionViewUrl}

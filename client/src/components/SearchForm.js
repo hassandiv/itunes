@@ -5,9 +5,12 @@ import styled from 'styled-components'
 const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 280px;
     @media (max-width: 550px) {
-        width: 330px;
+        width: 300px;
+    }
+    @media (max-width: 330px) {
+        width: 280px;
     }
 `;
 const StyledH2 = styled.h2`

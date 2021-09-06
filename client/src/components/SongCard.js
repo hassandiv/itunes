@@ -20,6 +20,9 @@ const StyledCard = styled.div`
     @media (max-width: 550px) {
         width: 330px;
     }
+    @media (max-width: 330px) {
+        width: 280px;
+    }
 `;
 const StyledH1 = styled.h1`
     color: #fff;
@@ -92,6 +95,9 @@ const StyledImg = styled.img`
     width: 160px;
     height: 100%;
     object-fit: cover;
+    @media (max-width: 330px) {
+        width: 100px;
+    }
 `;
 
 const SongCard = ({ artistName, trackName, artworkUrl100, previewUrl, trackViewUrl, trackTimeMillis }) => {
