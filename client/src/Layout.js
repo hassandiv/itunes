@@ -133,41 +133,48 @@ const Layout = () => {
     const [full, setFull] = useState(false)
     const [loadMoreItems, setLoadMoreItems] = useState(false)
 
+    console.log('data', data)
+    console.log('page', page)
+
+
     useEffect(() => {
         let cancel
-        setLoading(true)
-        axios({
-            method: 'GET',
-            url: `https://itunes.apple.com/search?term=${term}&entity=${entity}&limit=200`,
-            mode: 'cors',
-            cancelToken: new axios.CancelToken(c => cancel = c),
-        })
-        .then(res => {
-            if (res.status < 300) {
-                setData(res.data.results)
-                //const newData = res.data.results
-                //setData(prev => [...prev, ...newData])
-                setLoading(false)
-                setStatus({
-                    ...status,
-                    error: false,
-                    code: res.status,
+        if (term !== '' && entity !== '') {
+            setLoading(true)
+            axios({
+                method: 'GET',
+                url: `https://itunes.apple.com/search?term=${term}&entity=${entity}&limit=200`,
+                mode: 'cors',
+                cancelToken: new axios.CancelToken(c => cancel = c),
+            })
+                .then(res => {
+                    if (res.status < 300) {
+                        setData(res.data.results)
+                        //const newData = res.data.results
+                        //setData(prev => [...prev, ...newData])
+                        setLoading(false)
+                        setStatus({
+                            ...status,
+                            error: false,
+                            code: res.status,
+                        })
+                    }
+                    console.log("Results for " + term + ": ", res.data)
                 })
-            }
-            //console.log("Results for " + term + ": ", res.data)
-        })
-        .catch(err => {
-            if (err.response && err.response.status > 300) {
-                setLoading(false)
-                setStatus({
-                    ...status,
-                    error: true,
-                    code: err.response.status,
+                .catch(err => {
+                    if (err.response && err.response.status > 300) {
+                        setLoading(false)
+                        setStatus({
+                            ...status,
+                            error: true,
+                            code: err.response.status,
+                        })
+                    }
+                    if (axios.isCancel(err)) return
                 })
-            }
-            if (axios.isCancel(err)) return
-        })
-        return () => cancel()
+            return () => cancel()
+        }
+        
     }, [term, entity])
 
     const sliceData = data.slice(0, limit)
@@ -189,8 +196,8 @@ const Layout = () => {
         }
     }
     
-    useEffect(() => {
-        if (term === '' || entity) {
+    useEffect(() => { //needs to go above the api ? // if term !== '' run the above api - if term === '' clear the data and dont run the api
+        if (term === '' || entity !== '') {
             setData([])
             setPage(1)
             setLimit(10)
