@@ -49,31 +49,31 @@ npm install cypress
 ### I've created 10 components for this App:
 
 1.``` provider > StoreContext.js```: 
-* Context API contains our initial states for the Application.
+* Context API contains our initial states for the Application. It manage the states between the components.
 
 2.``` App.js```: 
-* It contains our AppProvider, three Components: Header, Search, and Footer.
+* It contains our AppProvider, and three Components: Header, Layout, and Footer.
 
 3.``` Header.js```: 
-* Nav component is the header of the App, it contains menu items.
+* Header component is the header of the App, it contains menu items and logo.
 
 4.``` Layout.js```: 
-* Main component it contains our API call, load more function and layout.
+* Layout component it contains our API call, load more function and the app layout.
 
 5.``` Drawer.js```: 
-* Our sidebar has menu links and our searchform component.
+* Sidebar has menu links and the search form component.
 
 6.``` Footer.js```: 
 * Footer for the application.
 
 7.```components > ArtistCard.js```: 
-* It contains Artist props and JSX. 
+* Card component for the music Artist. 
 
 8.```components > AlbumCard.js```: 
-* It contains Album props and JSX. 
+* Card component for the Albums. 
 
 9.```components > SongCard.js```: 
-* It contains Song props and JSX. 
+* Card component for the Songs. 
 
 10.```components > SearchForm.js```: 
-* It contains our search form input and radio buttons. 
+* Search form component has input and radio buttons. 
