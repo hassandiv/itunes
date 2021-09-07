@@ -196,7 +196,7 @@ const Layout = () => {
         }
     }
     
-    useEffect(() => { //needs to go above the api ? // if term !== '' run the above api - if term === '' clear the data and dont run the api
+    useEffect(() => {
         if (term === '' || entity !== '') {
             setData([])
             setPage(1)
