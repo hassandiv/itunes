@@ -4,7 +4,7 @@
 * Frontend in React JS, JSX and Styled Components.
 * Backend in Node JS and Express.
 * iTunes Developer API.
-* JS united testing with Cypress.io.
+* JS unit testing with Cypress.io
 
 ## How to use/test the App:
 #### Open visual studio terminal and run the following commands

@@ -190,14 +190,17 @@ const Layout = () => {
     }
     
     useEffect(() => {
-        setData([])
-        setPage(1)
-        setLimit(10)
-        setStatus({
-            error: null,
-            code: null
-        })
+        if (term === '' || entity) {
+            setData([])
+            setPage(1)
+            setLimit(10)
+            setStatus({
+                error: null,
+                code: null
+            })
+        }
     }, [term, entity])
+    
 
     return (
         <StyledContainer>
