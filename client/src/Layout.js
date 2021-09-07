@@ -133,10 +133,6 @@ const Layout = () => {
     const [full, setFull] = useState(false)
     const [loadMoreItems, setLoadMoreItems] = useState(false)
 
-    console.log('data', data)
-    console.log('page', page)
-
-
     useEffect(() => {
         let cancel
         if (term !== '' && entity !== '') {
@@ -208,7 +204,6 @@ const Layout = () => {
         }
     }, [term, entity])
     
-
     return (
         <StyledContainer>
             <StyledMenuIcon
