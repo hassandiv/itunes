@@ -1,4 +1,5 @@
 import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { StoreProvider } from './provider/StoreContext'
 import Layout from './Layout'
 import Header from './Header'
@@ -8,9 +9,11 @@ const App = () => {
 
   return (
     <StoreProvider>
-      <Header/>
-      <Layout/>
-      <Footer />
+      <Router>
+        <Header/>
+        <Layout/>
+        <Footer />
+      </Router>
     </StoreProvider>
   )
 }

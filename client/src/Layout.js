@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { StoreContext } from './provider/StoreContext'
 import axios from 'axios'
 import styled from 'styled-components'
-import { spinner, fadeIn } from './animation/KeyFrames';
+import { spinner, fadeIn } from './animation/KeyFrames'
 import SongCard from './components/SongCard'
 import ArtistCard from './components/ArtistCard'
 import AlbumCard from './components/AlbumCard'
@@ -43,9 +43,8 @@ const StyledSection = styled.section`
 const StyledTitle = styled.span`
     color: #000000;
     font-size: 2rem;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-weight: 900;
-    letter-spacing: 0em;
+    line-height: 1.5;
     text-align: center;
 `;
 const StyledUl = styled.ul`
@@ -54,7 +53,7 @@ const StyledUl = styled.ul`
     flex-wrap: wrap;
     flex-direction: row;
     margin: 0 auto;
-    width: 1050px;
+    width: 990px;
     max-width: 100%;
     padding: 0px;
     padding-top: 30px;
@@ -122,6 +121,7 @@ const StyledIconNF = styled.img`
 `;
 const StyledLoadMore= styled.p`
     font-size: 1.3rem;
+    line-height: 1.2;
     padding: 40px 0px;
 `;
 

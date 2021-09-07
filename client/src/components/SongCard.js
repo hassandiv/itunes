@@ -1,89 +1,75 @@
 import styled from 'styled-components';
 
 const StyledCard = styled.div`
-    width: 470px;
+    width: 445px;
     max-width: 100%;
     height: 150px;
     background-color: #232323;
     border-radius: 5px;
-    padding: 10px;
+    padding: 15px;
+    margin: 10px;
     position: relative;
     text-align: left;
-    margin: 10px;
     overflow: hidden;
     box-shadow:
     0 5px 10px rgba(154,160,185,0.7),
     0 15px 40px rgba(166,173,201,0.7);
-    @media (max-width: 768px) {
+    @media (max-width: 768px) { //ipad
         width: 500px;
     }
-    @media (max-width: 550px) {
+    @media (max-width: 550px) { //iphone 6,7,8, x, max
         width: 330px;
     }
-    @media (max-width: 330px) {
-        width: 280px;
+    @media (max-width: 330px) { //phone 5SE
+        width: 270px;
     }
 `;
 const StyledH1 = styled.h1`
     color: #fff;
-    font-size: 1.25rem;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 1.1rem;
     font-weight: 400;
-    line-height: 1.334;
-    letter-spacing: 0em;
-    margin: 0px;
+    line-height: 1.5;
     width: 240px;
 `;
 const StyledH6 = styled.h6`
     color: rgba(255, 255, 255, 0.7);
-    font-size: 1rem;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 0.9rem;
     font-weight: 400;
-    line-height: 1.75;
+    line-height: 1.3;
     letter-spacing: 0.00938em;
-    margin: 0px;
     width: 240px;
+    @media (max-width: 330px) {
+        width: 180px;
+    }
 `;
 const StyledSmall = styled.small`
     color: #fff;
     font-size: 0.8rem;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    font-weight: 600;
+    font-weight: 400;
+    line-height: 1;
     letter-spacing: 0.00938em;
     position: absolute;
     top: 15px;
     right: 170px;
     z-index: 10;
-`;
-const StyledRow = styled.div`
-    width: 310px;
-    display: flex;
-    position: absolute;
-    bottom: 25px;
-    left: auto;
-    right: auto;
-    @media (min-width: 1400px) {
-        width: 300px;
+    @media (max-width: 330px) {
+        top: 18px;
+        right: 111px;
     }
+`;
+const StyledAudio = styled.audio`
+    width: 280px;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
     @media (max-width: 768px) {
-        width: 350px;
+        width: 330px;
     }
     @media (max-width: 550px) {
         width: 180px;
+        left: 10px;
     }
 `;
-// const StyledPPIcon = styled.img`
-//     display: block;
-//     width: 25px;
-//     height: 100%;
-//     cursor: pointer;
-// `;
-// const StyledIcon = styled.img`
-//     display: block;
-//     width: 15px;
-//     height: 100%;
-//     cursor: pointer;
-// `;
 const StyledLink = styled.a`
     text-decoration: none;
 `;
@@ -114,23 +100,13 @@ const SongCard = ({ artistName, trackName, artworkUrl100, previewUrl, trackViewU
                     {trackName}
                 </StyledH1>
             </StyledLink>
-            <StyledSmall>{str}</StyledSmall>
             <StyledH6>{artistName}</StyledH6>
-            <StyledImg src={artworkUrl100} />
-            <StyledRow>
-            {/* <StyledIcon alt="previous" src="/previous.svg" />
-            <StyledPPIcon
-                alt="play"
-                onClick={() => setState(prevState => !prevState)}
-                src={state ? "/play-button-arrowhead.svg" : "/pause.svg"}
-                type="audio/mpeg"
-            />
-            <StyledIcon alt="next" src="/next.svg" /> */}
-            <audio controls>
+            <StyledAudio controls>
                 <source src={previewUrl} type="audio/x-m4a" />
-            </audio>
-            </StyledRow>
+            </StyledAudio>
+            <StyledSmall>{str}</StyledSmall>
+            <StyledImg src={artworkUrl100} />
         </StyledCard>
-        )
+    )
 }
 export default SongCard

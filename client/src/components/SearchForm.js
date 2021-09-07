@@ -5,29 +5,30 @@ import styled from 'styled-components'
 const StyledForm = styled.form`
     display: flex;
     flex-direction: column;
-    width: 280px;
+    width: 285px;
     @media (max-width: 550px) {
         width: 300px;
+        margin-left: 20px;
     }
     @media (max-width: 330px) {
         width: 280px;
+        margin-left: 0px;
     }
 `;
 const StyledH2 = styled.h2`
     color: #fff;
     font-size: 1.25rem;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-weight: 600;
-    line-height: 1.334;
-    letter-spacing: 0em;
+    line-height: 1.5;
+    margin: 10px 5px 15px 5px;
 `;
 const StyledFlexRow = styled.div`
     display: flex;
     flex-direction: row;
+    align-items: baseline;
 `;
 const StyledRadioInput = styled.input`
     cursor: pointer;
-    z-index: 1;
     &:focus {
         outline: none;
     }
@@ -35,6 +36,8 @@ const StyledRadioInput = styled.input`
 const StyledLabel = styled.label`
     color: #ffffff;
     width: 100px;
+    font-size: 1rem;
+    line-height: 1;
 `;
 const StyledInput = styled.input`
     background-color: transparent;
@@ -43,8 +46,11 @@ const StyledInput = styled.input`
     padding: 15px;
     color: #ffffff;
     outline: none;
-    margin-top: 30px;
+    margin-top: 25px;
     z-index: 1;
+    @media (max-width: 550px) {
+        width: 100%;
+    }
 `;
 
 const SearchForm = () => {

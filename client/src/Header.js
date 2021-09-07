@@ -1,3 +1,5 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const StyledNav = styled.nav`
@@ -11,7 +13,6 @@ const StyledNav = styled.nav`
 `;
 const StyledUl = styled.ul`
     width: 250px;
-    list-style: none;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -22,15 +23,22 @@ const StyledUl = styled.ul`
 `;
 const StyledLi = styled.li`
     list-style: none;
+    transition: 0.5s all;
+    padding: 11px 10px;
+    margin: 0px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: transparent;
+    &:hover {
+        background-color: #1d1c1c;
+    }
 `;
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
     text-decoration: none;
     color: #ffffff;
     font-size: 1rem;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-weight: 400;
-    line-height: 1.334;
-    letter-spacing: 0em;
+    line-height: 1.5;
 `;
 const StyledIcon = styled.img`
     display: block;
@@ -49,13 +57,19 @@ const Header = () => {
             <StyledIcon alt="logo" src="/wave.svg" />
             <StyledUl>
                 <StyledLi>
-                    <StyledLink href="#">Premium</StyledLink>
+                    <StyledLink to="/">
+                        Premium
+                    </StyledLink>
                 </StyledLi>
                 <StyledLi>
-                    <StyledLink href="#">Support</StyledLink>
+                    <StyledLink to="/">
+                        Support
+                    </StyledLink>
                 </StyledLi>
                 <StyledLi>
-                    <StyledLink href="#">Download</StyledLink>
+                    <StyledLink to="/">
+                        Download
+                    </StyledLink>
                 </StyledLi>
             </StyledUl>
         </StyledNav>

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 const StyledCard = styled.div`
-    width: 300px;
-    height: 400px;
+    width: 310px;
+    height: 350px;
     background-color: #232323;
     border-radius: 5px;
-    padding: 10px;
-    position: relative;
+    // padding: 10px;
+    // position: relative;
     text-align: left;
     margin: 10px;
     overflow: hidden;
@@ -17,52 +17,46 @@ const StyledCard = styled.div`
         width: 275px;
     }
 `;
+const StyledFlex = styled.div`
+    height: 80px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+`;
 const StyledH1 = styled.h1`
     color: #fff;
-    font-size: 1.3rem;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    font-weight: 600;
-    line-height: 1.334;
-    letter-spacing: 0em;
-    margin: 0px;
-    position: absolute;
-    bottom: 75px;
-    left: 15px;
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.5;
 `;
 const StyledH6 = styled.h6`
     color: rgba(255, 255, 255, 0.7);
-    font-size: 1rem;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-size: 0.9rem;
     font-weight: 400;
-    line-height: 1.75;
     letter-spacing: 0.00938em;
-    margin: 0px;
-    position: absolute;
-    bottom: 40px;
-    left: 15px;
 `;
 const StyledLink = styled.a`
     text-decoration: none;
 `;
 const StyledImg = styled.img`
-    position: absolute;
-    top: 15px;
-    right: 0;
-    left: 0;
-    margin: 0 auto;
     display: block;
-    width: auto;
-    height: 65%;
-    object-fit: cover;
+    max-width: 100%;
+    height: 60%;
+    margin: 0 auto;
+    padding: 15px 0px;
 `;
 
 const ArtistCard = ({ artistName, artistLinkUrl, artistType }) => {
 
     return (
         <StyledCard>
-            <StyledLink href={artistLinkUrl} target="_blank"><StyledH1>{artistName}</StyledH1></StyledLink>
-            <StyledH6>{artistType}</StyledH6>
             <StyledLink href={artistLinkUrl} target="_blank"><StyledImg alt={artistName} src="/user.svg" /></StyledLink>
+            <StyledFlex>
+                <StyledLink href={artistLinkUrl} target="_blank"><StyledH1>{artistName}</StyledH1></StyledLink>
+                <StyledH6>{artistType}</StyledH6>
+            </StyledFlex>
         </StyledCard>
     )
 }

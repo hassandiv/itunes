@@ -1,58 +1,40 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import SearchForm from './components/SearchForm';
+import SearchForm from './components/SearchForm'
 
 const StyledFlex = styled.div`
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    flex-direction: column;
     width: 320px;
-    //width: 100%;
     height: 340px;
-    margin: 0 auto;
-    padding-top: 20px;
-    @media (max-width: 768px) {
-        height: 420px;
-    }
-    @media (max-width: 550px) {
-        margin: 0px 20px;
-    }
-    @media (max-width: 330px) {
-        margin: 0px;
-    }
 `;
 const StyledUl = styled.ul`
-    list-style: none;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: left;
-    height: 115px;
-    width: 280px;
+    width: 100%;
     padding: 0px;
+    margin-bottom: 0px;
     @media (max-width: 550px) {
-        width: 300px;
-    }
-    @media (max-width: 330px) {
-        width: 280px;
+        width: 320px;
     }
 `;
 const StyledMenuUl = styled.ul`
     display: none;
     padding: 0px;
-    height: 115px;
     @media (max-width: 768px) {
-        width: 280px;
-        list-style: none;
+        margin: 0px;
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
     @media (max-width: 550px) {
-        width: 300px;
-    }
-    @media (max-width: 330px) {
-        width: 280px;
+        width: 320px;
     }
 `;
 const StyledLi = styled.li`
@@ -60,17 +42,23 @@ const StyledLi = styled.li`
     display: flex;
     flex-direction: row;
     align-items: center;
+    transition: 0.5s all;
+    padding: 10px 20px;
+    margin: 2px 0px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: transparent;
     &:hover {
-        border: 2px #fff;
+        background-color: #1d1c1c;
     }
 `;
-const StyledLink = styled.a`
+const StyledLink = styled(Link)`
     text-decoration: none;
     color: #ffffff;
     font-size: 1rem;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     font-weight: 400;
-    letter-spacing: 0em;
+    line-height: 1.5;
     padding: 0px;
     margin: 0px;
 `;
@@ -89,29 +77,41 @@ const Drawer = () => {
             <StyledUl>
                 <StyledLi>
                     <StyledIcon alt="Home" src="/home.svg" />
-                    <StyledLink href="#">Home</StyledLink>
+                    <StyledLink to="/">
+                        Home
+                    </StyledLink>
                 </StyledLi>
                 <StyledLi>
                     <StyledIcon alt="Your Library" src="/library.svg" />
-                    <StyledLink href="#">Your Library</StyledLink>
+                    <StyledLink to="/">
+                        Your Library
+                    </StyledLink>
                 </StyledLi>
                 <StyledLi>
                     <StyledIcon alt="nLiked songs" src="/like.svg" />
-                    <StyledLink href="#">Liked Songs</StyledLink>
+                    <StyledLink to="/">
+                        Liked Songs
+                    </StyledLink>
                 </StyledLi>
             </StyledUl>
             <StyledMenuUl>
                 <StyledLi>
                     <StyledIcon alt="Premium" src="/premium-badge.svg" />
-                    <StyledLink href="#">Premium</StyledLink>
+                    <StyledLink to="/">
+                        Premium
+                    </StyledLink>
                 </StyledLi>
                 <StyledLi>
                     <StyledIcon alt="Support" src="/help.svg" />
-                    <StyledLink href="#">Support</StyledLink>
+                    <StyledLink to="/">
+                        Support
+                    </StyledLink>
                 </StyledLi>
                 <StyledLi>
                     <StyledIcon alt="Download" src="/cloud-computing.svg" />
-                    <StyledLink href="#">Download</StyledLink>
+                    <StyledLink to="/">
+                        Download
+                    </StyledLink>
                 </StyledLi>
             </StyledMenuUl>
             <SearchForm />
